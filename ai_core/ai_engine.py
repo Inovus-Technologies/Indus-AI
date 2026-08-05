@@ -8,7 +8,7 @@ from sklearn.metrics.pairwise import cosine_similarity
 import torch
 import torch.nn as nn
 import json
-from my_transformers import CustomTransformer
+from .my_transformers import CustomTransformer
 
 # ================= DYNAMIC PATH CONFIGURATION =================
 # Get the directory where this script (ai_engine.py) is located

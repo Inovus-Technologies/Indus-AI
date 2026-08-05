@@ -1,6 +1,0 @@
-Flask
-flask-cors
-numpy
-scikit-learn
-torch
-gunicorn

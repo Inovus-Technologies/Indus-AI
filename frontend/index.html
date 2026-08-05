@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Indus AI</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- Splash Screen with New Logo in Center -->
+  <div id="splash-screen" class="splash">
+    <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" height="200">
+      <defs>
+        <!-- Blue lotus gradient, simplified for smaller size -->
+        <radialGradient id="lotusFill" cx="50%" cy="50%" r="70%" fx="50%" fy="40%">
+          <stop offset="0%" stop-color="#6b7af0" stop-opacity="1" />
+          <stop offset="100%" stop-color="#0f1a5c" stop-opacity="1" />
+        </radialGradient>
+        
+        <!-- Brain gradient, vibrant yet compact -->
+        <linearGradient id="brainFill" x1="0.5" y1="0" x2="0.5" y2="1">
+          <stop offset="0%" stop-color="#ffe57f" />
+          <stop offset="100%" stop-color="#e64a19" />
+        </linearGradient>
+
+        <!-- Glow effect for brain, toned down for smaller scale -->
+        <filter id="brainGlowEffect">
+          <feGaussianBlur in="SourceGraphic" stdDeviation="2" result="blur" />
+          <feColorMatrix in="blur" type="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 0.7 0" result="coloredBlur" />
+          <feMerge>
+            <feMergeNode in="coloredBlur" />
+            <feMergeNode in="SourceGraphic" />
+          </feMerge>
+        </filter>
+
+        <!-- Subtle shadow for petals -->
+        <filter id="petalShadow">
+          <feGaussianBlur in="SourceAlpha" stdDeviation="1" result="blur" />
+          <feOffset in="blur" dx="0.5" dy="0.5" result="offsetBlur" />
+          <feMerge>
+            <feMergeNode in="offsetBlur" />
+            <feMergeNode in="SourceGraphic" />
+          </feMerge>
+        </filter>
+      </defs>
+
+      <g>
+        <!-- Compact lotus petals with essential layers -->
+        <g fill="url(#lotusFill)" filter="url(#petalShadow)">
+          <!-- Outer petals -->
+          <path d="M50 70 C 30 67, 20 60, 15 47 C 18 65, 35 72, 50 70 Z" opacity="0.8"/>
+          <path d="M50 70 C 70 67, 80 60, 85 47 C 82 65, 65 72, 50 70 Z" opacity="0.8"/>
+          
+          <!-- Middle petals -->
+          <path d="M50 25 C 40 27, 30 35, 25 47 C 28 33, 40 23, 50 25 Z" opacity="0.9"/>
+          <path d="M50 25 C 60 27, 70 35, 75 47 C 72 33, 60 23, 50 25 Z" opacity="0.9"/>
+          
+          <!-- Inner petals -->
+          <path d="M50 20 C 42 20, 35 30, 37 40 C 42 25, 48 22, 50 20 Z" opacity="0.95"/>
+          <path d="M50 20 C 58 20, 65 30, 63 40 C 58 25, 52 22, 50 20 Z" opacity="0.95"/>
+
+          <!-- Subtle veins for detail -->
+          <g stroke="#0f1a5c" stroke-width="0.3" stroke-opacity="0.5" fill="none">
+            <path d="M50 70 C 35 65, 20 60, 15 47" />
+            <path d="M50 70 C 65 65, 80 60, 85 47" />
+            <path d="M50 25 C 40 30, 30 37, 25 47" />
+            <path d="M50 25 C 60 30, 70 37, 75 47" />
+          </g>
+        </g>
+
+        <!-- Compact brain with simplified circuit design -->
+        <g transform="translate(50 45) scale(0.6)">
+          <!-- Glowing core -->
+          <circle cx="0" cy="0" r="12" fill="#ffdd57" filter="url(#brainGlowEffect)" opacity="0.85" />
+
+          <!-- Brain circuits -->
+          <g stroke="url(#brainFill)" stroke-linecap="round" fill="none">
+            <!-- Main brain folds -->
+            <path d="M0 -25 C -15 -25 -20 -10 -20 0 C -20 10 -15 25 0 25 M0 -25 C 15 -25 20 -10 20 0 C 20 10 15 25 0 25" stroke-width="3"/>
+            
+            <!-- Central axis -->
+            <line x1="0" y1="-25" x2="0" y2="25" stroke-width="1.5" />
+            
+            <!-- Simplified circuit paths -->
+            <path d="M0 -15 C -10 -10 -8 0 -12 5" stroke-width="1.5" />
+            <path d="M-12 5 L -18 12" stroke-width="1.5"/>
+            <path d="M0 15 C -10 10 -8 0 -12 -5" stroke-width="1.5" />
+            <path d="M-12 -5 L -18 -12" stroke-width="1.5"/>
+            <path d="M0 -15 C 10 -10 8 0 12 5" stroke-width="1.5" />
+            <path d="M12 5 L 18 12" stroke-width="1.5"/>
+            <path d="M0 15 C 10 10 8 0 12 -5" stroke-width="1.5" />
+            <path d="M12 -5 L 18 -12" stroke-width="1.5"/>
+
+            <!-- Circuit nodes -->
+            <g fill="url(#brainFill)" stroke="none">
+              <circle cx="0" cy="-15" r="2"/> <circle cx="0" cy="15" r="2"/>
+              <circle cx="-12" cy="5" r="2"/> <circle cx="-12" cy="-5" r="2"/>
+              <circle cx="12" cy="5" r="2"/> <circle cx="12" cy="-5" r="2"/>
+              <circle cx="-18" cy="12" r="2"/> <circle cx="-18" cy="-12" r="2"/>
+              <circle cx="18" cy="12" r="2"/> <circle cx="18" cy="-12" r="2"/>
+            </g>
+          </g>
+        </g>
+
+        <!-- Compact text for app logo -->
+        <text x="50" y="90" font-family="'Montserrat', sans-serif" font-size="16" font-weight="700" fill="#0f1a5c" text-anchor="middle" letter-spacing="0.8" filter="url(#petalShadow)">INDUS AI</text>
+      </svg>
+  </div>
+
+  <div class="app" style="display: none;">  <!-- Hidden until splash hides -->
+    <header class="app-header">
+      <div class="header-content">
+        <button class="sidebar-toggle" onclick="toggleSidebar()" title="Toggle Sidebar">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="3" y1="12" x2="21" y2="12"></line>
+            <line x1="3" y1="6" x2="21" y2="6"></line>
+            <line x1="3" y1="18" x2="21" y2="18"></line>
+          </svg>
+        </button>
+        <svg id="logo-svg" viewBox="0 0 120 28" height="28">
+          <text x="0" y="20" class="logo-text-indus">IndusAI</text>  <!-- Combined IndusAI -->
+        </svg>
+
+        <button class="theme-toggle" onclick="toggleTheme()" title="Toggle Theme">
+          </button>
+      </div>
+    </header>
+
+    <!-- New Sidebar -->
+    <div class="sidebar" id="sidebar">
+      <div class="sidebar-header">
+        <h2>Previous Chats</h2>
+        <button class="new-chat-btn" onclick="createNewChat()">New Chat</button>
+      </div>
+      <div class="chat-list" id="chat-list"></div>
+    </div>
+
+    <!-- New Backdrop for dimming and closing sidebar -->
+    <div class="backdrop" id="backdrop" onclick="toggleSidebar()"></div>
+
+    <main class="chat-area" id="chat-box">
+      </main>
+
+    <div class="chat-input-container">
+      <form class="chat-input-area" onsubmit="sendMessage(event)">
+        <div class="input-wrapper">
+          <textarea id="user-input" placeholder="Message Indus AI..." rows="1"></textarea>
+          <button type="submit" class="send-btn" title="Send Message">
+            <svg class="send-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
+              <path fill="currentColor" d="M11.9999 2.00003L12 20M12 2.00003L18 8.00003M12 2.00003L6 8.00003" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,604 @@
+/* === FINAL, CORRECTED & RE-STYLED INDUS UI === */
+
+/* --- Theme Variables (New Gemini/ChatGPT Inspired Dark Theme) --- */
+:root {
+  --font-main: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --background: #131314; /* Main dark background */
+  --text-primary: #e3e3e3;
+  --text-secondary: #9aa0a6;
+  --header-bg: #131314;
+  --header-border: #3c4043;
+  --user-message-bg: #3c4043;
+  --input-container-bg: #131314;
+  --input-bg: #1e1f20;
+  --input-border: #3c4043;
+  --input-focus-border: #8ab4f8;
+  --send-button-bg: #8ab4f8;
+  --send-button-text: #202124;
+}
+
+/* Note: Light mode is not fully defined here, we are focusing on the dark theme as requested */
+body.light-mode {
+  --background: #ffffff;
+  --text-primary: #202124;
+  --text-secondary: #5f6368;
+  --header-bg: #ffffff;
+  --header-border: #dfe1e5;
+  --user-message-bg: #f1f3f4;
+  --input-container-bg: #ffffff;
+  --input-bg: #f1f3f4;
+  --input-border: #dfe1e5;
+  --input-focus-border: #1a73e8;
+  --send-button-bg: #1a73e8;
+  --send-button-text: #ffffff;
+}
+
+/* --- Base Setup --- */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body, html {
+  font-family: var(--font-main);
+  background: var(--background);
+  color: var(--text-primary);
+  background-attachment: fixed;
+  /* Add transition for background and text color */
+  transition: background 0.4s ease, color 0.4s ease;
+}
+
+/* --- App Layout --- */
+.app {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.chat-area {
+  flex-grow: 1;
+  padding: 24px 18px;
+  padding-top: 80px;
+  padding-bottom: 140px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  max-width: 768px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+/* --- Header --- */
+.app-header {
+  background: var(--header-bg);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--header-border);
+  padding: 12px 16px;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  width: 100%;
+  /* Add transition for background and border color */
+  transition: background-color 0.4s ease, border-color 0.4s ease;
+}
+
+.header-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 768px;
+  margin: 0 auto;
+}
+
+.app-header h1 {
+  font-size: 18px;
+  font-weight: 500;
+  color: var(--text-primary);
+}
+
+.theme-toggle {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.theme-toggle svg {
+  width: 22px;
+  height: 22px;
+  stroke: var(--text-secondary);
+  transition: transform 0.3s ease, stroke 0.4s ease;
+}
+
+/* Add this new rule for the hover animation */
+.theme-toggle:hover svg {
+  transform: rotate(180deg) scale(1.1);
+}
+
+/* --- Chat Messages --- */
+.message {
+  max-width: 95%;
+  font-size: 16px;
+  line-height: 1.7;
+  word-wrap: break-word;
+  animation: fadeInUp 0.5s ease;
+}
+
+.user {
+  background-color: var(--user-message-bg);
+  color: var(--text-primary);
+  align-self: flex-end;
+  border-radius: 20px;
+  padding: 12px 18px;
+  /* Add transition for background color */
+  transition: background-color 0.4s ease;
+}
+
+.ai {
+  align-self: flex-start;
+  color: var(--text-primary);
+}
+
+/*Chat input Box*/
+.chat-input-container {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: var(--input-container-bg);
+  z-index: 100;
+  padding: 16px 16px 24px 16px;
+  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);  /* Subtle shadow for depth */
+  transition: padding 0.3s ease;  /* Smooth expansion */
+}
+
+.chat-input-area {
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  width: 100%;
+  max-width: 768px;
+  margin: 0 auto;
+  background: var(--input-bg);
+  border: 1px solid var(--input-border);
+  border-radius: 24px;
+  padding: 8px 8px 8px 16px;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);  /* Light shadow for professionalism */
+}
+
+.chat-input-area:focus-within {
+  border-color: var(--input-focus-border);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);  /* Enhanced focus shadow */
+}
+
+.input-wrapper {
+  display: flex;
+  flex-grow: 1;
+  align-items: center;
+}
+
+#user-input {
+  flex: 1;
+  border: none;
+  background: transparent;
+  color: var(--text-primary);
+  font-family: var(--font-main);
+  font-size: 16px;
+  padding: 8px 0;
+  padding-right: 48px;
+  outline: none;
+  resize: none;
+  line-height: 1.6;
+  max-height: 200px;
+  overflow-y: auto;
+  transition: padding 0.2s ease;
+}
+
+#user-input::placeholder {
+  color: var(--text-secondary);
+  opacity: 0.8;  /* Subtle placeholder */
+}
+
+.send-btn {
+  position: absolute;
+  right: 8px;
+  bottom: 8px;
+  background: var(--send-button-bg);
+  color: var(--send-button-text);
+  width: 32px;
+  height: 32px;
+  border: none;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  opacity: 0;
+  transform: scale(0.5);
+  pointer-events: none;
+  transition: all 0.2s ease-out, background 0.2s ease;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);  /* Button shadow */
+}
+
+.send-btn.visible {
+  opacity: 1;
+  transform: scale(1);
+  pointer-events: auto;
+}
+
+.send-btn:hover {
+  background: darken(var(--send-button-bg), 10%);  /* Hover effect (adjust if using SCSS, or use a hex value) */
+}
+
+.send-icon {
+  width: 20px;
+  height: 20px;
+  transition: transform 0.2s ease;
+}
+
+.send-btn:hover .send-icon {
+  transform: rotate(20deg);  /* Subtle icon animation on hover */
+}
+
+/* --- Feedback & Typing Indicators --- */
+.feedback-wrapper {
+  display: flex;
+  margin-top: 12px;
+}
+
+.feedback-buttons {
+  display: flex;
+  gap: 8px;
+}
+
+.feedback-btn {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+  opacity: 0.6;
+}
+
+.feedback-btn svg {
+  stroke: var(--text-secondary);
+}
+
+.typing-indicator {
+  padding: 12px 0;
+}
+
+.typing-dot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  background: var(--text-secondary);
+  border-radius: 50%;
+  animation: typing 1.2s infinite ease-in-out;
+  margin: 0 2px;
+}
+
+.typing-dot:nth-child(2) { animation-delay: 0.15s; }
+.typing-dot:nth-child(3) { animation-delay: 0.3s; }
+
+/* --- Animations --- */
+@keyframes typing {
+  0%, 80%, 100% { transform: scale(0); }
+  40% { transform: scale(1.0); }
+}
+
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* === NEW SVG LOGO STYLES === */
+#logo-svg {
+  height: 24px; /* Control the logo size */
+  font-family: 'Poppins', 'Segoe UI', sans-serif; /* A specific font for the logo */
+}
+
+.logo-text-indus {
+  font-size: 22px;
+  font-weight: 600; /* Bolder weight */
+  fill: var(--text-primary);
+}
+
+.logo-text-ai {
+  font-size: 22px;
+  font-weight: 400; /* Lighter weight */
+  fill: var(--text-primary); /* Use the brand color */
+}
+
+/* Splash Screen Styles (full-screen logo on start) */
+.splash {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background: var(--background);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  opacity: 1;
+  transition: opacity 0.5s ease;
+  animation: splashFadeOut 2s ease-in-out 1s forwards;  /* Fade out after 1s delay */
+}
+
+.logo-text-indusai {
+  font-family: "Chalkboard", cursive; /* Specific font for splash logo */
+  font-weight: 800;  /* Bolder for dominance */
+  font-size: 40px;   /* Larger for impact */
+  animation: slideFromCenter 1s ease-out forwards;  /* Single animation from center */
+}
+
+/* Animations */
+@keyframes slideFromCenter {
+  0% {
+    transform: translateY(-100%) scale(0.5);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes splashFadeOut {
+  0% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(1.2);  /* Fade out with increasing size */
+  }
+}
+
+/* Hide splash after animation */
+.splash.hidden {
+  display: none;
+}
+
+/* Feedback buttons pro design (gray fill on active) */
+.feedback-btn {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+  opacity: 0.6;
+  transition: opacity 0.2s, transform 0.2s;
+}
+
+.feedback-btn:hover {
+  opacity: 1;
+  transform: scale(1.1);
+}
+
+.feedback-btn svg {
+  stroke: #808080;  /* Default gray stroke */
+  fill: none;
+  transition: fill 0.2s, stroke 0.2s;
+}
+
+.feedback-btn.active svg {
+  fill: #808080;  /* Filled gray on active */
+  stroke: none;
+}
+
+.feedback-btn.shake {
+  animation: shake 0.5s;
+}
+
+@keyframes shake {
+  0% { transform: translate(1px, 1px) rotate(0deg); }
+  10% { transform: translate(-1px, -2px) rotate(-1deg); }
+  20% { transform: translate(-3px, 0px) rotate(1deg); }
+  30% { transform: translate(3px, 2px) rotate(0deg); }
+  40% { transform: translate(1px, -1px) rotate(1deg); }
+  50% { transform: translate(-1px, 2px) rotate(-1deg); }
+  60% { transform: translate(-3px, 1px) rotate(0deg); }
+  70% { transform: translate(3px, 1px) rotate(-1deg); }
+  80% { transform: translate(-1px, -1px) rotate(1deg); }
+  90% { transform: translate(1px, 2px) rotate(0deg); }
+  100% { transform: translate(1px, -2px) rotate(-1deg); }
+}
+
+/* Enhanced animation styles */
+.animated-char {
+  opacity: 0;
+  animation: fadeInChar 0.2s ease-out forwards;
+  display: inline;  /* Keep characters inline */
+}
+
+@keyframes fadeInChar {
+  from { opacity: 0; transform: translateY(3px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.typing-cursor {
+  display: inline-block;
+  width: 2px;
+  height: 1em;
+  background: var(--text-primary);
+  animation: blink 0.75s step-end infinite;
+  margin-left: 1px;
+  vertical-align: bottom;
+}
+
+@keyframes blink {
+  50% { opacity: 0; }
+}
+
+/* Sidebar Styles */
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;  /* Start from left:0 for translate */
+  width: 280px;
+  height: 100vh;
+  background: var(--background);
+  border-right: 1px solid var(--header-border);
+  transform: translateX(-100%);
+  transition: transform 0.3s ease;
+  z-index: 20;
+  display: flex;
+  flex-direction: column;
+  padding: 16px;
+  overflow-y: auto;
+}
+
+.sidebar.open {
+  transform: translateX(0);
+}
+
+.sidebar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.sidebar-header h2 {
+  font-size: 18px;
+  font-weight: 500;
+  color: var(--text-primary);
+}
+
+.new-chat-btn {
+  background: var(--send-button-bg);
+  color: var(--send-button-text);
+  border: none;
+  padding: 6px 12px;
+  border-radius: 16px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.chat-list {
+  flex-grow: 1;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.chat-item {
+  background: var(--input-bg);
+  padding: 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.2s;
+  position: relative;
+}
+
+.chat-item:hover {
+  background: var(--user-message-bg);
+}
+
+.chat-item-title {
+  font-size: 15px;
+  color: var(--text-primary);
+  margin-bottom: 4px;
+}
+
+.chat-item-date {
+  font-size: 12px;
+  color: var(--text-secondary);
+}
+
+.chat-item-actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.chat-item-actions button {
+  background: var(--user-message-bg);
+  border: none;
+  color: var(--text-primary);
+  cursor: pointer;
+  font-size: 12px;
+  padding: 4px 8px;
+  border-radius: 4px;
+  transition: background 0.2s, transform 0.2s;
+}
+
+.chat-item-actions button:hover {
+  background: var(--input-focus-border);
+  transform: scale(1.05);
+}
+
+.chat-item-actions button:active {
+  transform: scale(0.95);
+}
+
+/* Header adjustments for hamburger */
+.header-content {
+  display: flex;
+  align-items: center;
+  gap: 12px;  /* Space between hamburger, logo, and theme toggle */
+}
+
+.sidebar-toggle {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+}
+
+.sidebar-toggle svg {
+  width: 24px;
+  height: 24px;
+  stroke: var(--text-secondary);
+  transition: transform 0.3s;
+}
+
+.sidebar-toggle:hover svg {
+  transform: rotate(90deg);
+}
+
+/* Backdrop for dimming */
+.backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.3);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+  z-index: 15;
+}
+
+.backdrop.visible {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Remove shift for overlapping sidebar */
+.app.sidebar-open .chat-area,
+.app.sidebar-open .chat-input-container {
+  margin-left: 0 !important;  /* No shift, sidebar overlaps */
+}
+
+/* Ensure input container is above backdrop but below sidebar */
+.chat-input-container {
+  z-index: 16;  /* Above backdrop (z=15), below sidebar (z=20) */
+}
+
+/* Normalize chat brightness - adjust if needed */
+.chat-area {
+  filter: brightness(1);  /* Reset to normal */
+}
+
+/* Dim chat area more when sidebar open */
+.app.sidebar-open .chat-area {
+  filter: brightness(0.9);  /* Slightly dimmed for normalization */
+}

@@ -2,7 +2,7 @@ import os
 import sqlite3
 from flask import Flask, request, jsonify, send_from_directory
 from flask_cors import CORS
-from ai_engine import AIEngine
+from .ai_engine import AIEngine
 
 app = Flask(__name__)
 CORS(app)

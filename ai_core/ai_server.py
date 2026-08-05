@@ -185,3 +185,5 @@ def delete_chat():
 if __name__ == "__main__":
     print(f"[SERVER] Indus AI Server (Flask) running at http://0.0.0.0:8080")
     app.run(host='0.0.0.0', port=8080)
+if __name__ == "__main__":
+    app.run(host="0.0.0.0", port=5000)
